@@ -1,3 +1,5 @@
+from utils import integration
+
 class FuzzySet:
 
     def __init__(self, d_min, d_max):
@@ -98,3 +100,32 @@ class FuzzySet:
             den = sum(self._degree)
 
             return num/den
+        elif method == "MOM": #Mean of Maximum
+            vals = []
+            vmax = 0
+    
+            for i, x_val in enumerate(self._domain):
+                deg = self._degree[i]
+                
+                if vmax < deg:
+                        vmax = deg
+                        vals = [x_val]
+                elif vmax == deg:
+                        vals.append(x_val)
+
+            return sum(vals) / len(vals)
+        
+        elif method == "BOA": #Bisector of Area
+            alpha, beta = self._domain_min, self._domain_max
+            z0 = (alpha + beta) / 2
+            while True:
+                lf = integration(self._degree[int(alpha):int(z0)], alpha, z0)
+                rg = integration(self._degree[int(z0):int(beta)], z0, beta)
+                if lf == rg:
+                        return z0
+                elif lf > rg:
+                        beta = z0
+                else:
+                        alpha = z0
+                
+                z0 = (alpha + beta) / 2
