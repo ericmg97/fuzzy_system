@@ -1,5 +1,6 @@
 from fuzzy_variable import OutputVariable, InputVariable
 from fuzzy_system import InferenceSys
+from utils import format_print
 
 temperatura = InputVariable('Temperatura', 10, 50)
 
@@ -69,15 +70,37 @@ system.add_rule(
 			'Humedad':'Seco' },
 		{ 'Velocidad':'Rapido'})
 
+##################TESTS####################
 
-#Test
+test1 = {'Temperatura':30,
+		'Humedad':62}
 
-out_par = {'Temperatura':32,
-		'Humedad':60}
 
-inf_method = "Mamdani" #Metodo de inferencia
-def_method = "COA" #Metodo de desdifusificacion
+inf_method = "Larsen" #Metodo de inferencia: Larsen
 
-output = system.execute(out_par, inf_method, def_method)
-print(output)
+def_method = "BOA" #Bisector of Area
+output = system.execute(test1, inf_method, def_method)
+format_print(test1, inf_method, def_method, output)
 
+def_method = "COA" #Centroide of Area
+output = system.execute(test1, inf_method, def_method)
+format_print(test1, inf_method, def_method, output)
+
+def_method = "MOM" #Mean of Maximum
+output = system.execute(test1, inf_method, def_method)
+format_print(test1, inf_method, def_method, output)
+
+
+inf_method = "Mamdani" #Metodo de inferencia: Mamdani
+
+def_method = "BOA" #Bisector of Area
+output = system.execute(test1, inf_method, def_method)
+format_print(test1, inf_method, def_method, output)
+
+def_method = "COA" #Centroide of Area
+output = system.execute(test1, inf_method, def_method)
+format_print(test1, inf_method, def_method, output)
+
+def_method = "MOM" #Mean of Maximum
+output = system.execute(test1, inf_method, def_method)
+format_print(test1, inf_method, def_method, output)

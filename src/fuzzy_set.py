@@ -14,7 +14,7 @@ class FuzzySet:
         self.last_degree_value = 0
 
     def _set_domain(self):
-        step = (self._domain_min - self._domain_max)/100
+        step = (self._domain_max - self._domain_min)/100
         domain = [self._domain_min]
         for _ in range(99):
             domain.append(round(domain[-1] + step, 2))
@@ -94,7 +94,7 @@ class FuzzySet:
 
         return result
 
-    def defuzzify(self, method="COA"):  # Añadir BOA y MOM
+    def defuzzify(self, method="COA"):
         if method == "COA":  # Centoride of Area
             num = sum([deg*dom for deg, dom in zip(self._degree, self._domain)])
             den = sum(self._degree)
