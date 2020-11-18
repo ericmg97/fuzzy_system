@@ -79,6 +79,13 @@ class FuzzySet:
 
         return result
 
+    def union(self, f_set):
+
+        result = FuzzySet(self._domain_min, self._domain_max)
+        result._degree = [max(deg1, deg2) for deg1, deg2 in zip(self._degree, f_set._degree)]
+
+        return result
+
     def defuzzify(self, method="COA"):  # Añadir BOA y MOM
         if method == "COA":  # Centoride of Area
             num = sum([deg*dom for deg, dom in zip(self._degree, self._domain)])
