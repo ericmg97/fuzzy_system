@@ -21,4 +21,5 @@ class FuzzyRule():
 			
 			if method == "Mamdani":
 			    c_var.add_rule_contribution(c_set.min_operator(rule_min))
-			
+			elif method == "Larsen":
+				c_var.add_rule_contribution(c_set.product_operator(rule_min))

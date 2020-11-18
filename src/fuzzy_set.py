@@ -6,19 +6,18 @@ class FuzzySet:
         self._domain_max = d_max
 
         self._step = (d_max - d_min)/100
-        self._domain = FuzzySet.set_domain(d_min, d_max)
+        self._domain = self._set_domain()
         self._degree = [0.00]*101
 
         self.last_degree_value = 0
 
-    @staticmethod
-    def set_domain(d_min, d_max):
-        step = (d_max - d_min)/100
-        domain = [d_min]
+    def _set_domain(self):
+        step = (self._domain_min - self._domain_max)/100
+        domain = [self._domain_min]
         for _ in range(99):
             domain.append(round(domain[-1] + step, 2))
 
-        domain.append(d_max)
+        domain.append(self._domain_max)
 
         return domain
 
@@ -76,6 +75,13 @@ class FuzzySet:
 
         result = FuzzySet(self._domain_min, self._domain_max)
         result._degree = [min(deg, val) for deg in self._degree]
+
+        return result
+
+    def product_operator(self, val):
+		
+        result = FuzzySet(self._domain_min, self._domain_max)
+        result._degree = [deg* val for deg in self._degree]
 
         return result
 
