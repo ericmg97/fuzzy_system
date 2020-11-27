@@ -2,17 +2,17 @@ from fuzzy_variable import OutputVariable, InputVariable
 from fuzzy_system import InferenceSys
 from utils import format_print
 
-temperatura = InputVariable('Temperatura', 10, 50)
+temperatura = InputVariable('Temperatura', 0, 150)
 
-temperatura.add_triangular('Fria', 10, 10, 20)
-temperatura.add_triangular('Tibia', 15, 25, 35)
-temperatura.add_triangular('Caliente', 30, 50, 50)
+temperatura.add_triangular('Fria', 0, 0, 80)
+temperatura.add_triangular('Tibia', 70, 90, 110)
+temperatura.add_triangular('Caliente', 100, 150, 150)
 
-humedad = InputVariable('Humedad', 20, 100)
+humedad = InputVariable('Humedad', 0, 100)
 
-humedad.add_triangular('Humedo', 20, 20, 40)
-humedad.add_trapezoidal('Moderado', 30, 50, 70, 90)
-humedad.add_triangular('Seco', 80, 100, 100)
+humedad.add_triangular('Seco', 0, 0, 40)
+humedad.add_trapezoidal('Moderado', 30, 45, 65, 80)
+humedad.add_triangular('Humedo', 70, 100, 100)
 
 motor_velocidad = OutputVariable('Velocidad', 0, 100)
 
@@ -72,8 +72,8 @@ system.add_rule(
 
 ##################TESTS####################
 
-test1 = {'Temperatura':30,
-		'Humedad':62}
+test1 = {'Temperatura':90,
+		'Humedad':20}
 
 
 inf_method = "Larsen" #Metodo de inferencia: Larsen
